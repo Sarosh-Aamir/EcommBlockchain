@@ -1,0 +1,1189 @@
+{
+  "EcommContract": {
+    "contractAddress": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+    "contractABI": [
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_escrowAccountAddress",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "parentId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inStock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "supplierId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "metaDataURI",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplierPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "merchantPrice",
+            "type": "uint256"
+          }
+        ],
+        "name": "addChildProduct",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "isCreated",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inStock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "supplierId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "metaDataURI",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplierPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "merchantPrice",
+            "type": "uint256"
+          }
+        ],
+        "name": "addProduct",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "isCreated",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "productId",
+            "type": "string"
+          }
+        ],
+        "name": "addToCart",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "hasAdded",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "orderId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "url",
+            "type": "string"
+          }
+        ],
+        "name": "addTrackingUrl",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "buyerCart",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "orderProcessed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "buyerIds",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "buyerOrders",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "orderId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "sender",
+            "type": "address"
+          },
+          {
+            "internalType": "enum Order.OrderStatus",
+            "name": "orderStatus",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalPaid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isCanceled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "orderFulfilled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "orderReturned",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isOrderClosed",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "buyerOrdersCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "buyers",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "buyerAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "buyersCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "cartProducts",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inStock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "supplierId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "metaDataURI",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplierPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "merchantPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "cartProductsCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "carts",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "orderProcessed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "orderId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalPaid",
+            "type": "uint256"
+          }
+        ],
+        "name": "checkout",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "orderProcessed",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "childMatrixItems",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inStock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "supplierId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "metaDataURI",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplierPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "merchantPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "escrowAccountAddress",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          }
+        ],
+        "name": "initializeBuyerCart",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "isInit",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "merchants",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "sellerAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSupplier",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isRegistered",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "hasPaidGuarantee",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "guranteePaid",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "merchantsCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "orderIds",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "orderTracking",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "orders",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "orderId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "sender",
+            "type": "address"
+          },
+          {
+            "internalType": "enum Order.OrderStatus",
+            "name": "orderStatus",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalPaid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isCanceled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "orderFulfilled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "orderReturned",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isOrderClosed",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "productIds",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "products",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inStock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "supplierId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "metaDataURI",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplierPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "merchantPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "productsCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "buyerAddress",
+            "type": "address"
+          }
+        ],
+        "name": "registerBuyer",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "isRegistered",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSupplier",
+            "type": "bool"
+          }
+        ],
+        "name": "registerSeller",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "hasRegistered",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "sellerIds",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "sellerProductsMapping",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "inStock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "supplierId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "metaDataURI",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplierPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "merchantPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "name": "sellers",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "sellerAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSupplier",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isRegistered",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "hasPaidGuarantee",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "guranteePaid",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "sellersCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "suppliers",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "sellerAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSupplier",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isActive",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isRegistered",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "hasPaidGuarantee",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "guranteePaid",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "suppliersCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "totalOrders",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]
+  }
+}
