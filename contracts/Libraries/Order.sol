@@ -19,6 +19,7 @@ library Order {
         bool orderFulfilled;
         bool orderReturned;
         bool isOrderClosed;
+        bool orderExists;
     }
 
 }

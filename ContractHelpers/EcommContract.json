@@ -1,6 +1,6 @@
 {
   "EcommContract": {
-    "contractAddress": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+    "contractAddress": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
     "contractABI": [
       {
         "inputs": [
@@ -233,53 +233,8 @@
         "outputs": [
           {
             "internalType": "string",
-            "name": "orderId",
+            "name": "",
             "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "buyerId",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "cartId",
-            "type": "string"
-          },
-          {
-            "internalType": "address",
-            "name": "sender",
-            "type": "address"
-          },
-          {
-            "internalType": "enum Order.OrderStatus",
-            "name": "orderStatus",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint256",
-            "name": "totalPaid",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isCanceled",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "orderFulfilled",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "orderReturned",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "isOrderClosed",
-            "type": "bool"
           }
         ],
         "stateMutability": "view",
@@ -578,6 +533,219 @@
         "inputs": [
           {
             "internalType": "string",
+            "name": "buyerId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          }
+        ],
+        "name": "getBuyerOrderByIdx",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "orderId",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "buyerId",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "cartId",
+                "type": "string"
+              },
+              {
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+              },
+              {
+                "internalType": "enum Order.OrderStatus",
+                "name": "orderStatus",
+                "type": "uint8"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalPaid",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "isCanceled",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "orderFulfilled",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "orderReturned",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "isOrderClosed",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "orderExists",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct Order.OrderStruct",
+            "name": "order",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "cartId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          }
+        ],
+        "name": "getCartProductId",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "sku",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inStock",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "supplierId",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "metaDataURI",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "supplierPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "merchantPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "isActive",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct Product.ProductStruct",
+            "name": "product",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "sellerId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          }
+        ],
+        "name": "getSellerProductByIdx",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "id",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "sku",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "inStock",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "supplierId",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "metaDataURI",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "supplierPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "merchantPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "isActive",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct Product.ProductStruct",
+            "name": "product",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
             "name": "cartId",
             "type": "string"
           },
@@ -767,6 +935,11 @@
             "internalType": "bool",
             "name": "isOrderClosed",
             "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "orderExists",
+            "type": "bool"
           }
         ],
         "stateMutability": "view",
@@ -890,18 +1063,8 @@
           },
           {
             "internalType": "string",
-            "name": "",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
             "name": "cartId",
             "type": "string"
-          },
-          {
-            "internalType": "address",
-            "name": "buyerAddress",
-            "type": "address"
           }
         ],
         "name": "registerBuyer",
@@ -1182,6 +1345,30 @@
           }
         ],
         "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "orderId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "status",
+            "type": "uint256"
+          }
+        ],
+        "name": "updateOrderStatus",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "isUpdated",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
         "type": "function"
       }
     ]

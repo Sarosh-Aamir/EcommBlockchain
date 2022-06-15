@@ -54,7 +54,7 @@ contract Ecomm {
 
     //Order State Variables
     mapping(string => Order.OrderStruct) public orders; //orderId => OrderStruct
-    mapping(string => Order.OrderStruct[]) public buyerOrders; //buyerId => OrderStruct[]
+    mapping(string => string[]) public buyerOrders; //buyerId => orderId
     mapping(string => uint) public buyerOrdersCount; //buyerId=>OrderStruct[].length
     mapping(string => string) public orderTracking; //orderId => tracking url
     string []  public orderIds;
@@ -77,7 +77,7 @@ contract Ecomm {
         //Check if token is enough for the registration
         require(Helpers.toEth(msg.value) == Seller.GUARANTEE_AMOUNT, Seller.getGuaranteeFeeErrMsg());
         (bool success,) = owner.call{value : msg.value}("");
-        require(success, "Transaction Failed. Cannot Register");
+        require(success, "TF");
         Seller.SellerStruct memory seller = Seller.SellerStruct(
             id,
             name,
@@ -105,7 +105,7 @@ contract Ecomm {
         uint supplierPrice,
         uint merchantPrice
     ) external returns (bool isCreated){
-        require(sellers[supplierId].isActive, "Seller Is Inactive Or Not Created");
+        require(sellers[supplierId].isActive, "SI");
         Product.ProductStruct memory product = Product.ProductStruct(
             id,
             sku,
@@ -132,7 +132,7 @@ contract Ecomm {
         uint supplierPrice,
         uint merchantPrice
     ) external returns (bool isCreated){
-        require(sellers[supplierId].isActive, "Seller Is Inactive Or Not Created");
+        require(sellers[supplierId].isActive, "SI");
         Product.ProductStruct memory product = Product.ProductStruct(
             id,
             sku,
@@ -158,10 +158,10 @@ contract Ecomm {
         isInit = true;
     }
 
-    function registerBuyer(string memory buyerId, string memory name, string memory email, string memory, string memory cartId, address buyerAddress) external returns (bool isRegistered){
+    function registerBuyer(string memory buyerId, string memory name, string memory email, string memory cartId) external returns (bool isRegistered){
 
-        require(buyers[buyerId].isActive, "Buyer Already Exist");
-        Buyer.BuyerStruct memory buyer = Buyer.BuyerStruct(buyerId, name, email, buyerAddress, true);
+        require(!buyers[buyerId].isActive, "BAE");
+        Buyer.BuyerStruct memory buyer = Buyer.BuyerStruct(buyerId, name, email, msg.sender, true);
         initializeBuyerCart(cartId, buyerId);
         buyers[buyerId] = buyer;
         buyersCount++;
@@ -172,9 +172,9 @@ contract Ecomm {
 
     function addToCart(string memory cartId, string memory productId) external returns (bool hasAdded){
         //Check if cart has initialized
-        require(carts[cartId].isActive, "Cart Not Found, Please Initialize Cart First");
+        require(carts[cartId].isActive, "CNO");
         //check if product exist
-        require(products[productId].isActive, "Product Not Found");
+        require(products[productId].isActive, "PNO");
         //add to cart
         cartProducts[cartId].push(products[productId]);
         cartProductsCount[cartId] ++;
@@ -182,16 +182,16 @@ contract Ecomm {
     }
 
     function checkout(string memory orderId, string memory buyerId, string memory cartId, uint totalPaid) external payable returns (bool orderProcessed){
-        require(buyers[buyerId].isActive, "Cart Not Found, Please Initialize Cart First");
-        require(carts[cartId].isActive, "Cart Not Found, Please Initialize Cart First");
-        require(cartProductsCount[cartId] > 0, "Cart is empty");
+        require(buyers[buyerId].isActive, "BNO");
+        require(carts[cartId].isActive, "CNO");
+        require(cartProductsCount[cartId] > 0, "CE");
         require(totalPaid > 0, "0 Ethers");
-        require(totalPaid == Helpers.toEth(msg.value), "Eth Amount Not Balanced");
-        Order.OrderStruct memory order = Order.OrderStruct(orderId, buyerId, cartId, msg.sender, Order.OrderStatus.PENDING_FULFILLMENT, totalPaid, false, false, false, false);
+        require(totalPaid == Helpers.toEth(msg.value), "ENB");
+        Order.OrderStruct memory order = Order.OrderStruct(orderId, buyerId, cartId, msg.sender, Order.OrderStatus.PENDING_FULFILLMENT, totalPaid, false, false, false, false,true);
         (bool success,) = escrowAccountAddress.call{value : msg.value}("");
-        require(success, "Escrow Transaction Failed. Cannot Proceed With Checkout");
+        require(success, "ETF");
         orders[orderId] = order;
-        buyerOrders[buyerId].push(order);
+        buyerOrders[buyerId].push(orderId);
         buyerOrdersCount[buyerId]++;
         totalOrders++;
         //reset cart
@@ -199,11 +199,46 @@ contract Ecomm {
         orderProcessed = true;
     }
 
+    function updateOrderStatus(string memory orderId, uint status) external returns (bool isUpdated){
+        Order.OrderStatus  orderStatus;
+        Order.OrderStruct storage order = orders[orderId];
+
+        if (status == 1) {
+            orderStatus = Order.OrderStatus.FULFILLED;
+            order.orderFulfilled = true;
+        } else if (status == 2) {
+            orderStatus = Order.OrderStatus.CANCELED;
+        } else if (status == 3) {
+            orderStatus = Order.OrderStatus.RETURNED;
+        }
+        require(orders[orderId].orderExists, "IOI");
+        order.orderStatus = orderStatus;
+        isUpdated = true;
+    }
+
     function addTrackingUrl(string memory orderId, string memory url) external {
-        require(orders[orderId].orderFulfilled, "Order not fulfilled");
+        require(orders[orderId].orderFulfilled, "ONF");
         orderTracking[orderId] = url;
     }
 
-}
+
+    function getCartProductId(string memory cartId, uint index) external view returns (Product.ProductStruct memory product) {
+        product = cartProducts[cartId][index];
+
+
+    }
+
+    function getSellerProductByIdx(string memory sellerId, uint index) external view returns (Product.ProductStruct memory product) {
+        product = sellerProductsMapping[sellerId][index];
+
+
+    }
+
+    function getBuyerOrderByIdx(string memory buyerId, uint index) external view returns (Order.OrderStruct memory order) {
+        string memory orderId = buyerOrders[buyerId][index];
+        order = orders[orderId];
+
+
+    }}
 
 

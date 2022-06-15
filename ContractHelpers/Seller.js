@@ -104,7 +104,8 @@ export const Seller = () => {
                 return sellers;
             }
 
-        }
+        },
+
 
 
     }

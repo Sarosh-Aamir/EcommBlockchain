@@ -23,6 +23,7 @@ export default function AddProduct() {
     const [merchantPrice, setMerchantPrice] = useState(0);
     const [category, setCategory] = useState('');
 
+
     const addProduct = async () => {
         let imageUrl = await MoralisHelpers.uploadFile(`${file.name}`, file);
         let metaData = {
@@ -80,6 +81,12 @@ export default function AddProduct() {
                 setCategory(e.target.value);
                 break;
         }
+    }
+
+    if (!appUser.sellerType) {
+        return (
+            <></>
+        )
     }
 
     return (

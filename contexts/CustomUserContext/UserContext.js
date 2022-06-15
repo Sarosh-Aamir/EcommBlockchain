@@ -35,7 +35,6 @@ export const UserContext = ({children}) => {
         }
 
     }
-
     const getAppUser = () => {
         if (!!appUser) {
             return JSON.parse(appUser);

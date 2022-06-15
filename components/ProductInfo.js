@@ -1,4 +1,3 @@
-
 import {useEffect, useState} from 'react'
 import {StarIcon} from '@heroicons/react/solid'
 import {RadioGroup} from '@headlessui/react'
@@ -64,20 +63,10 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductInfo() {
+export default function ProductInfo(metaData) {
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-    const {isInitialized} = useMoralis();
-    const productModel = ProductModel();
-
-    useEffect(() => {
-        console.log('Moralis?', isInitialized);
-        if (isInitialized) {
-            //console.log(productModel.addProduct({name: 'SaroshFile', info: 'blala', isActive: true}));
-
-        }
-    },[isInitialized])
-
+    console.log(metaData)
 
     return (
         <div className="bg-white">

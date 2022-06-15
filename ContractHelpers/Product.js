@@ -1,8 +1,7 @@
-import Moralis from "moralis";
 import EcommContractJSON from "../ContractHelpers/EcommContract.json";
 import {useMoralis, useWeb3Contract, useWeb3ExecuteFunction} from "react-moralis";
-import {useEffect} from "react";
 import {BigNumber} from "ethers";
+import Moralis from "moralis";
 
 export const Product = () => {
     const {runContractFunction} = useWeb3Contract();
@@ -51,7 +50,6 @@ export const Product = () => {
             }
 
         },
-
         productIds: async () => {
             let ids = [];
 
@@ -85,15 +83,15 @@ export const Product = () => {
             try {
                 let ids = await PRODUCT_METHODS.productIds();
                 for (let i = 0; i < ids.length; i++) {
-                    const sellerOptions = {
+                    const funcOptions = {
                         functionName: "products",
                         params: {'': ids[i]}
                     }
-                    let seller = await runContractFunction({
+                    let product = await runContractFunction({
                         throwOnError: true,
-                        params: {...contractOptions, ...sellerOptions}
+                        params: {...contractOptions, ...funcOptions}
                     });
-                    products.push(seller);
+                    products.push(product);
 
                 }
             } catch (e) {
@@ -102,9 +100,148 @@ export const Product = () => {
                 return products;
             }
 
+        },
+        getProduct: async (id) => {
+            let productFromChain = null;
+            try {
+                let ids = await PRODUCT_METHODS.productIds();
+
+                const funcOptions = {
+                    functionName: "products",
+                    params: {'': id}
+                }
+                let product = await runContractFunction({
+                    throwOnError: true,
+                    params: {...contractOptions, ...funcOptions}
+                });
+                productFromChain = product;
+            } catch (e) {
+                console.log(e);
+            } finally {
+                return productFromChain;
+            }
+
+        },
+        addToCart: async (cartId, productId) => {
+            let hasAdded = false;
+            try {
+                const funcOptions = {
+                    functionName: "addToCart",
+                    params: {cartId: cartId, productId: productId}
+                }
+                hasAdded = await runContractFunction({
+                    throwOnError: true,
+                    params: {...contractOptions, ...funcOptions}
+                });
+            } catch (e) {
+                console.log(e);
+            } finally {
+                return hasAdded;
+            }
+        },
+        cartInit: async (cartId, buyerId) => {
+            let isInit = false;
+            try {
+                const funcOptions = {
+                    functionName: "initializeBuyerCart",
+                    params: {cartId: cartId, buyerId: buyerId}
+                }
+                isInit = await runContractFunction({
+                    throwOnError: true,
+                    params: {...contractOptions, ...funcOptions}
+                });
+            } catch (e) {
+                console.log(e);
+            } finally {
+                return isInit;
+            }
+        },
+        getCartId: async (buyerId) => {
+            let cartId = '';
+            try {
+
+            } catch (e) {
+
+            } finally {
+
+            }
+
+        },
+
+
+        getCartProductsCount: async (cartId) => {
+            let count = 0
+            try {
+
+                const funcOptions = {
+                    functionName: "cartProductsCount",
+                    params: {'': cartId}
+                }
+
+                count = await runContractFunction({
+                    throwOnError: true,
+                    params: {...contractOptions, ...funcOptions}
+                });
+
+            } catch (e) {
+                console.log(e);
+            } finally {
+                return count;
+            }
+        },
+        getCartProducts: async (cartId) => {
+            let products = [];
+            try {
+                let cartCount = await PRODUCT_METHODS.getCartProductsCount(cartId);
+                console.log(`Cart ID: ${cartId} Count`, cartCount.toNumber());
+                if (!!cartCount) {
+                    cartCount = cartCount.toNumber();
+                    for (let c = 0; c < cartCount; c++) {
+                        const funcOptions = {
+                            functionName: "getCartProductId",
+                            params: {'cartId': cartId, index: c}
+                        }
+
+                        let product = await runContractFunction({
+                            throwOnError: true,
+                            params: {...contractOptions, ...funcOptions}
+                        });
+                        products.push(product);
+
+                    }
+                }
+
+
+            } catch (e) {
+                console.log(e);
+            } finally {
+                return products;
+            }
+        },
+
+
+        checkout: async (orderId, buyerId, cartId, totalPaid) => {
+            let res = null;
+            try {
+                const funcOptions = {
+                    functionName: "checkout",
+                    params: {'orderId': orderId, 'buyerId': buyerId, 'cartId': cartId, 'totalPaid': totalPaid},
+                    msgValue: Moralis.Units.ETH(totalPaid)
+                }
+
+                res = await runContractFunction({
+                    throwOnError: true,
+                    params: {...contractOptions, ...funcOptions}
+                });
+
+
+            } catch (e) {
+                console.log(e);
+            } finally {
+                return res;
+            }
+
         }
-
-
     }
 
     return PRODUCT_METHODS;

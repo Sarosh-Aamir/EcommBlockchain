@@ -4,17 +4,32 @@ import {useMoralis, useWeb3ExecuteFunction} from "react-moralis";
 import {Seller} from "../ContractHelpers/Seller";
 import {useEffect, useState} from "react";
 import {useCustomUserContext} from "../contexts/CustomUserContext/UserContext";
+import {Buyer} from "../ContractHelpers/Buyer";
 
-export default function Example() {
-    const {isAuthenticating, isAuthenticated, user, authenticate, account} = useMoralis();
+export default function SignUpBuyer() {
+    const {
+        isAuthenticating,
+        isAuthenticated,
+        user,
+        authenticate,
+        account,
+        enableWeb3,
+        isWeb3EnableLoading,
+        isWeb3Enabled
+    } = useMoralis();
     const [email, setEmail] = useState()
     const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
-    const [sellerType, setSellerType] = useState('');
     const [password, setPassword] = useState('');
-    const contractSellerMethods = Seller();
+    const contractBuyerMethods = Buyer();
     const {getAppUser, updateUser} = useCustomUserContext();
 
+    useEffect(async () => {
+        if (!isWeb3Enabled && !isWeb3EnableLoading) {
+            await enableWeb3()
+        }
+
+    }, [isWeb3Enabled, isWeb3EnableLoading])
 
     useEffect(() => {
         console.log('Signup¬', getAppUser());
@@ -49,31 +64,39 @@ export default function Example() {
 
     }
 
+    async function initCart(buyerId) {
+        let cartObject = Moralis.Object.extend("Cart");
+        let cart = new cartObject();
+        cart.set("buyerId", buyerId);
+        await cart.save();
+        console.log(cart);
+        return cart;
+    }
+
     async function handleRegister() {
         const user = new Moralis.User();
         user.set("username", userName);
         user.set("password", password);
         user.set("email", email);
-        user.set("type", "seller");
-        user.set("sellerType", sellerType);
-
-
-// other fields can be set just like with Moralis.Object
+        user.set("type", "buyer");
         user.set("phone", "415-392-0202");
         try {
             await user.signUp();
+            let cartInstance = await initCart(user.id);
+            user.set("cartId", cartInstance.id)
+            await user.save();
             await updateUser(user.id);
-            const registerSeller = contractSellerMethods.registerSeller({
+            let registerOptions = {
                 id: user.id,
-                isSupplier: sellerType == 'supplier',
                 name: userName,
-                email: email
-            });
-            console.log(true)
-            registerSeller.then((res) => {
+                email: email,
+                cartId: cartInstance.id
+            }
+            console.log(registerOptions);
+            const registerBuyer = contractBuyerMethods.registerBuyer(registerOptions);
+            registerBuyer.then((res) => {
                 res.wait().then((result) => {
                     console.log('result', result);
-                    alert(result);
                 })
             })
 
@@ -157,30 +180,6 @@ export default function Example() {
                                     placeholder="Full Name"
                                     onChange={handleOnChange}
                                 />
-                            </div>
-                        </div>
-                        <div className="flex justify-center">
-                            <div>
-                                <div className="form-check">
-                                    <input
-                                        defaultValue="Supplier"
-                                        className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                        type="radio" name="seller-type" id="seller-type-1" onChange={handleOnChange}/>
-                                    <label className="form-check-label inline-block text-gray-800"
-                                           htmlFor="seller-type-1">
-                                        Supplier
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <input
-                                        defaultValue="Merchant"
-                                        className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                        type="radio" name="seller-type" id="seller-type-2" onChange={handleOnChange}/>
-                                    <label className="form-check-label inline-block text-gray-800"
-                                           htmlFor="seller-type-2">
-                                        Merchant
-                                    </label>
-                                </div>
                             </div>
                         </div>
                         <div>
